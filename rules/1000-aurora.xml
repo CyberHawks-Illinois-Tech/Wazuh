@@ -1,0 +1,102 @@
+<group name="aurora">
+
+    <rule id="100000" level="0">
+        <decoded_as>json</decoded_as>
+        <field name="aurora_eventid">\.+</field>
+        <description>Aurora alerts.</description>
+        <options>no_full_log</options>
+    </rule>
+    
+    <rule id="100002" level="12">
+        <if_sid>100000</if_sid>
+        <field name="Rule_Level">low</field>
+        <description>$(Rule_Title)</description>
+    </rule>
+    
+    <rule id="100003" level="13">
+        <if_sid>100000</if_sid>
+        <field name="Rule_Level">medium</field>
+        <description>$(Rule_Title)</description>
+    </rule>
+
+    <rule id="100004" level="14">
+        <if_sid>100000</if_sid>
+        <field name="Rule_Level">high</field>
+        <description>$(Rule_Title)</description>
+    </rule>
+    
+    <rule id="100005" level="15">
+        <if_sid>100000</if_sid>
+        <field name="Rule_Level">critical</field>
+        <description>$(Rule_Title)</description>
+    </rule>
+    
+    <rule id="100006" level="3">
+        <if_sid>100003</if_sid>
+        <field name="Rule_ID">31d68132-4038-47c7-8f8e-635a39a7c174</field>
+        <field name="Security_UserID">S-1-5-18</field>
+        <field name="SearchFilter">(objectCategory=computer)</field>
+        <description>Aurora Override - Domain Controller searching computers in LDAP</description>
+        <options>no_full_log</options>
+    </rule>
+    
+    <rule id="100007" level="3">
+        <if_sid>100003</if_sid>
+        <field name="Rule_ID">a9d4d3fa-8fc0-41bc-80b1-30b9fda79d6f</field>
+        <field name="Security_UserID">S-1-5-21-2282673685-3624254744-1119974793-1114</field>
+        <field name="SourceCommandLine">C:\\Windows\\system32\\svchost.exe -k netsvcs -p</field>
+        <field name="TargetCommandLine">cmd.exe /c powershell c:\\setup\\bot_rdp.ps1</field>
+        <description>Aurora Override - robb.stark running bot_rdp.ps1</description>
+        <options>no_full_log</options>
+    </rule>
+    
+    <rule id="100008" level="3">
+        <if_sid>100003</if_sid>
+        <field name="Rule_ID">a9d4d3fa-8fc0-41bc-80b1-30b9fda79d6f</field>
+        <field name="Security_UserID">S-1-5-21-2282673685-3624254744-1119974793-1112</field>
+        <field name="SourceCommandLine">C:\\Windows\\system32\\svchost.exe -k netsvcs -p</field>
+        <field name="TargetCommandLine">cmd.exe /c powershell New-PSDrive -Name "Public" -PSProvider "FileSystem" -Root "\\\\Meren\\Private"</field>
+        <description>Aurora Override - eddard.stark mounting Meren PSDrive</description>
+        <options>no_full_log</options>
+    </rule>
+    
+    <rule id="100009" level="3">
+        <if_sid>100003</if_sid>
+        <field name="Rule_ID">a9d4d3fa-8fc0-41bc-80b1-30b9fda79d6f</field>
+        <field name="Security_UserID">S-1-5-21-2282673685-3624254744-1119974793-1114</field>
+        <field name="SourceCommandLine">C:\\Windows\\system32\\svchost.exe -k netsvcs -p</field>
+        <field name="TargetCommandLine">cmd.exe /c powershell New-PSDrive -Name "Public" -PSProvider "FileSystem" -Root "\\\\Bravos\\Private"</field>
+        <description>Aurora Override - robb.stark mounting Bravos PSDrive</description>
+        <options>no_full_log</options>
+    </rule>
+    
+    <rule id="100010" level="0">
+        <if_sid>100003</if_sid>
+        <field name="Rule_ID">7ac407cc-0f48-4328-aede-de1d2e6fef41</field>
+        <field name="Computer">winterfell</field>
+        <field name="TargetUserSid">S-1-5-21-2282673685-3624254744-1119974793-1114</field>
+        <field name="Match_Strings">300 in EventID, S-1-5-32-544 in SidList, S-1-5-21- in TargetUserSid</field>
+        <description>Aurora Override - robb.stark in local Administrators group on Winterfell</description>
+        <options>no_full_log</options>
+    </rule>
+    
+    <rule id="100011" level="0">
+        <if_sid>100003</if_sid>
+        <field name="Rule_ID">7ac407cc-0f48-4328-aede-de1d2e6fef41</field>
+        <field name="Computer">winterfell</field>
+        <field name="TargetUserSid">S-1-5-21-2282673685-3624254744-1119974793-1112</field>
+        <field name="Match_Strings">300 in EventID, S-1-5-32-544 in SidList, S-1-5-21- in TargetUserSid</field>
+        <description>Aurora Override - eddard.stark in local Administrators group on Winterfell</description>
+        <options>no_full_log</options>
+    </rule>
+    
+    <rule id="100012" level="0">
+        <if_sid>100003</if_sid>
+        <field name="Rule_ID">7ac407cc-0f48-4328-aede-de1d2e6fef41</field>
+        <field name="TargetUserName">Vagrant</field>
+        <field name="Match_Strings">300 in EventID, S-1-5-32-544 in SidList, S-1-5-21- in TargetUserSid</field>
+        <description>Aurora Override - Vagrant in local Administrators group everywhere</description>
+        <options>no_full_log</options>
+    </rule>
+
+</group>

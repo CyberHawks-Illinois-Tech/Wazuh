@@ -1,0 +1,13 @@
+<group name="sysmon,sysmon_eid11_detections,windows,">
+
+    <rule id="92213" level="6" overwrite="yes">
+        <if_group>sysmon_event_11</if_group>
+        <field name="win.eventdata.targetFilename" type="pcre2">(?i)[c-z]:\\\\Users\\\\.+\\\\AppData\\\\Local\\\\Temp\\\\.+\.(exe|com|dll|vbs|js|bat|cmd|pif|wsh|ps1|msi|vbe)</field>
+        <options>no_full_log</options>
+        <description>Executable file dropped in folder commonly used by malware</description>
+        <mitre>
+          <id>T1105</id>
+        </mitre>
+    </rule>
+
+</group>

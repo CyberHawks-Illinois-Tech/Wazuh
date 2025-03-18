@@ -1,0 +1,11 @@
+<group name="sysmon,sysmon_eid1_detections,windows,">
+
+    <rule id="192055" level="6">
+        <if_sid>92055</if_sid>
+        <field name="win.eventdata.user">NORTH\\\\robb.stark</field>
+        <field name="win.eventdata.commandLine">\\FodHelper.exe -Embedding</field>
+        <field name="win.eventdata.parentCommandLine">\\svchost.exe -k DcomLaunch -p</field>
+        <description>robb.stark bypassing UAC with FodHelper.exe</description>
+    </rule>
+
+</group>
