@@ -1,9 +1,36 @@
 <group name="ids,suricata,">
 
-    <rule id="86601" level="12" overwrite="yes">
+    <rule id="86601" level="0" overwrite="yes">
         <if_sid>86600</if_sid>
         <field name="event_type">^alert$</field>
-        <description>Suricata: Alert - $(alert.signature)</description>
+        <description>Suricata alerts.</description>
+    </rule>
+    
+    <rule id="110001" level="12">
+        <if_sid>86601</if_sid>
+        <field name="alert.signature">4</field>
+        <description>$(alert.signature)</description>
+        <options>no_full_log</options>
+    </rule>
+    
+    <rule id="110002" level="13">
+        <if_sid>86601</if_sid>
+        <field name="alert.signature">3</field>
+        <description>$(alert.signature)</description>
+        <options>no_full_log</options>
+    </rule>
+
+    <rule id="110003" level="14">
+        <if_sid>86601</if_sid>
+        <field name="alert.signature">2</field>
+        <description>$(alert.signature)</description>
+        <options>no_full_log</options>
+    </rule>
+    
+    <rule id="110004" level="15">
+        <if_sid>86601</if_sid>
+        <field name="alert.signature">1</field>
+        <description>$(alert.signature)</description>
         <options>no_full_log</options>
     </rule>
 
